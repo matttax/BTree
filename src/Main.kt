@@ -1,6 +1,19 @@
+import java.io.BufferedReader
+import java.io.File
+
 fun main(args: Array<String>) {
-    if (args.isEmpty())
+    if (args.size == 1) {
+        val bufferedReader: BufferedReader = File(args[0]).bufferedReader()
+        val inputCollection = bufferedReader.use { it.readText() }.split(" ").map { it.toInt() }.toMutableList()
+        val b = BTree(inputCollection.first())
+        inputCollection -= inputCollection.first()
+        for (n in inputCollection)
+            b.insert(n)
+        b.print()
+    }
+    else {
         randomBTree().print()
+    }
 }
 
 private fun randomBTree() : BTree {

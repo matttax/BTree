@@ -1,8 +1,17 @@
+import java.util.Set;
+
 public class BTree {
     private Node root;
     private final int t;
     public BTree(int degree) {
         t = degree;
+    }
+
+    public BTree(int degree, Set<Integer> values) {
+        t = degree;
+        for (int v : values) {
+            insert(v);
+        }
     }
 
     private void insertValue(Node node, int value) {
@@ -19,7 +28,7 @@ public class BTree {
     }
 
 
-    private Node split(Node node, int key){
+    private Node split(Node node, int key) {
         Node left = new Node(t);
         Node right = new Node(t);
         int mid = getMid(node, left, right);
@@ -81,7 +90,7 @@ public class BTree {
     }
 
 
-    public void insert(int value){
+    public void insert(int value) {
         if (root == null) {
             Node node = new Node(t);
             insertValue(node, value);
